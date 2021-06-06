@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
 
   _onCompleted() {
     print('Music playing is ended');
-    state.stop();
+    player?.pause();
   }
 
   _onDuration(Duration duration) {
