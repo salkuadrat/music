@@ -34,7 +34,6 @@ For android, set `minSdkVersion` at your `android/app/build.gradle` to 21. Then 
       android:maxSdkVersion="28"
       tools:ignore="ScopedStorage"/>
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
   <application ...
 </manifest>
 ```
