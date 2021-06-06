@@ -1,3 +1,3 @@
-# MusicPlayer Example
+# Music Example
 
-Demonstrates how to use the musicplayer plugin.
+Demonstrates how to use the `music` plugin.

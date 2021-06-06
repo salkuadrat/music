@@ -1,5 +1,5 @@
 name: music_example
-description: Demonstrates how to use the musicplayer plugin.
+description: Demonstrates how to use the music plugin.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
