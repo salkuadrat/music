@@ -44,10 +44,6 @@ class _MyAppState extends State<MyApp> {
       onPosition: _onPosition,
       onError: _onError,
     );
-
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      player?.play(music);
-    });
   }
 
   @override
@@ -79,7 +75,11 @@ class _MyAppState extends State<MyApp> {
 
   _onCompleted() {
     print('Music playing is ended');
+    state.pause();
     player?.pause();
+
+    // depending on your application, 
+    // we can also call player?.stop() when completed
   }
 
   _onDuration(Duration duration) {
@@ -125,7 +125,8 @@ class _MyAppState extends State<MyApp> {
                 : IconButton(
                     icon: Icon(Icons.play_arrow_outlined, color: Colors.white),
                     iconSize: 40,
-                    onPressed: player?.resume,
+                    onPressed: () => state.position.inSeconds > 0 
+                      ? player?.resume() : player?.play(music),
                   ),
       );
 
