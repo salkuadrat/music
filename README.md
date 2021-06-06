@@ -118,4 +118,4 @@ player.stop();
 
 ## Example 
 
-Learn more from example project [here](example). Also, you can learn the code while running the example application on device: [musicplayer.apk](music.apk).
+Learn more from example project [here](example). Also, you can learn the code while running the example application on device: [music.apk](music.apk).
