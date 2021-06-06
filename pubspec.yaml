@@ -1,0 +1,32 @@
+name: music
+description: The easy way to play music in Flutter. Compatible with media notification Android 11 (R).
+version: 1.0.0
+author: Salman S
+homepage: https://github.com/salkuadrat/musicplayer
+repository: https://github.com/salkuadrat/musicplayer
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.0.0"
+
+dependencies:
+  crypto: ^3.0.1
+  flutter:
+    sdk: flutter
+  flutter_cache_manager: ^3.1.0
+  meta: ^1.3.0
+  path: ^1.8.0
+  path_provider: ^2.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.salkuadrat.music
+        pluginClass: MusicPlugin
+      ios:
+        pluginClass: MusicPlugin
