@@ -1,3 +1,7 @@
+## 1.0.2 - 07 June 2021
+
+* Change example project to handle background playing
+
 ## 1.0.1 - 07 June 2021
 
 * Clearing permissions.

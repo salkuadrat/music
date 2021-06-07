@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
     state.pause();
     player?.pause();
 
-    // depending on your application, 
+    // depending on your application,
     // we can also call player?.stop() when completed
   }
 
@@ -127,8 +127,9 @@ class _MyAppState extends State<MyApp> {
                 : IconButton(
                     icon: Icon(Icons.play_arrow_outlined, color: Colors.white),
                     iconSize: 40,
-                    onPressed: () => state.position.inSeconds > 0 
-                      ? player?.resume() : player?.play(music),
+                    onPressed: () => state.position.inSeconds > 0
+                        ? player?.resume()
+                        : player?.play(music),
                   ),
       );
 
@@ -137,7 +138,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: WillPopScope(
-        onWillPop: () async {  
+        onWillPop: () async {
           try {
             await channel.invokeMethod('back');
             return Future.value(false);

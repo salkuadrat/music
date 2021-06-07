@@ -36,13 +36,13 @@ Future<String> download(String url) async {
 
   _currentUrl = url;
   _currentFile = filename;
-  print('download: $filename');
+  //print('download: $filename');
   return filename;
 }
 
 /// preparing temporary file for cover image
 File getTempFile(Directory directory, String coverUrl) {
   String filename = md5.convert(utf8.encode(coverUrl)).toString();
-  print('getTempFile: $filename');
+  //print('getTempFile: $filename');
   return File('${directory.path}/$filename.jpg');
 }

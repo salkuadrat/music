@@ -16,7 +16,7 @@ or
 
 ```yaml
 dependencies:
-  music: ^1.0.1
+  music: ^1.0.2
 ```
 
 Then run `flutter pub get`.
