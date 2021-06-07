@@ -2,7 +2,7 @@
 
 The easy way to play music in Flutter.
 
-<img src="https://github.com/salkuadrat/music/raw/master/screenshot.png" alt="universe" width="360">
+<img src="https://github.com/salkuadrat/music/raw/master/screenshot.png" alt="universe" width="250">
 
 ## Getting Started
 
@@ -16,7 +16,7 @@ or
 
 ```yaml
 dependencies:
-  music: ^1.0.2
+  music: ^1.0.3
 ```
 
 Then run `flutter pub get`.

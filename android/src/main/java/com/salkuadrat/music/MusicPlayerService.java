@@ -59,7 +59,7 @@ public class MusicPlayerService extends Service {
             channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
             manager.createNotificationChannel(channel);
         }
-        
+
         // Fixing: Context.startForegroundService() did not then call Service.startForeground()
         // Start an empty notification before showing the real one
         showEmptyNotification();
@@ -161,8 +161,6 @@ public class MusicPlayerService extends Service {
             }
         }
 
-
-
         NotificationCompat.Builder builder = new NotificationCompat
             .Builder(getApplicationContext(), channelId)
             .setContentTitle(music.artist)
@@ -172,23 +170,24 @@ public class MusicPlayerService extends Service {
             .setOngoing(music.isPlaying)
             .setStyle(mediaStyle);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        int secpos = music.position / 1000;
+        int hour = secpos / 3600;
+        int minute = (secpos % 3600) / 60;
+        int second = secpos % 60;
+
+        Calendar now = Calendar.getInstance();
+        now.set(Calendar.HOUR_OF_DAY, minute);
+        now.set(Calendar.MINUTE, second);
+        now.set(Calendar.SECOND, 0);
+        long when = now.getTimeInMillis();
+        builder.setUsesChronometer(false);
+        builder.setWhen(when);
+
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             builder.setUsesChronometer(true);
         } else {
-            int secpos = music.position / 1000;
-            int hour = secpos / 3600;
-            int minute = (secpos % 3600) / 60;
-            int second = secpos % 60;
-
-            Calendar now = Calendar.getInstance();
-            now.set(Calendar.HOUR_OF_DAY, minute);
-            now.set(Calendar.MINUTE, second);
-            now.set(Calendar.SECOND, 0);
-            long when = now.getTimeInMillis();
-
             builder.setUsesChronometer(false);
-            builder.setWhen(when);
-        }
+        }*/
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             builder.setChannelId(channelId);
@@ -232,7 +231,7 @@ public class MusicPlayerService extends Service {
         // notification can be deleted) fire MediaButtonPendingIntent
         // with ACTION_PAUSE.
         builder.setDeleteIntent(pendingIntent(2, MusicAction.stop));
-        
+
         Intent notificationIntent = new Intent(getApplicationContext(), FlutterActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         builder.setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0,

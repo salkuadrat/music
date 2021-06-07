@@ -1,6 +1,6 @@
 name: music
 description: The easy way to play music in Flutter. Compatible with media notification Android 11 (R).
-version: 1.0.2
+version: 1.0.3
 #author: Salman S
 homepage: https://github.com/salkuadrat/music
 repository: https://github.com/salkuadrat/music
