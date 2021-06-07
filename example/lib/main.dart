@@ -1,6 +1,7 @@
 import 'package:colour/colour.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:music/music.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  MethodChannel channel = MethodChannel('music_example');
   PlayerState get state => Provider.of<PlayerState>(context, listen: false);
 
   MusicPlayer? player;
@@ -134,38 +136,48 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0.0, 1.0],
-          colors: [Colour('1D6DBD'), Colour('43CEA2')],
-        )),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Center(
-            child: Consumer<PlayerState>(
-              builder: (_, state, __) => Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ExtendedImage.network(music.image, width: 120),
-                  Gap(10),
-                  Text(music.title, style: TextStyle(color: Colors.white)),
-                  Gap(20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(durationStr(state.position),
-                          style: TextStyle(color: Colors.white)),
-                      _control,
-                      Text(durationStr(state.duration),
-                          style: TextStyle(color: Colors.white)),
-                    ],
-                  )
-                ],
+      home: WillPopScope(
+        onWillPop: () async {  
+          try {
+            await channel.invokeMethod('back');
+            return Future.value(false);
+          } catch (_) {
+            return Future.value(true);
+          }
+        },
+        child: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.0, 1.0],
+            colors: [Colour('1D6DBD'), Colour('43CEA2')],
+          )),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Center(
+              child: Consumer<PlayerState>(
+                builder: (_, state, __) => Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ExtendedImage.network(music.image, width: 120),
+                    Gap(10),
+                    Text(music.title, style: TextStyle(color: Colors.white)),
+                    Gap(20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(durationStr(state.position),
+                            style: TextStyle(color: Colors.white)),
+                        _control,
+                        Text(durationStr(state.duration),
+                            style: TextStyle(color: Colors.white)),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
